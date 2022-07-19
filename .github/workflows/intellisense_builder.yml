@@ -1,0 +1,20 @@
+name: Build Intellisense plugin for VSCode
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Build and release Intellisense
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Install python and dependencies
+        run: |
+          sudo apt-get install python3
+          sudo apt-get install pip
+          pip install marko
+          pip install beautifulsoup4
+
+      - name: Convert docs to Intellisense plugin
+        run: |
+          python3 generate-intellisense.py
